@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 
 
-// ALL Paths begin with //studentinformation
+// ALL Paths begin with //student/information
 // INDEX
 router.get('/', (req, res) => {
     const user = req.user

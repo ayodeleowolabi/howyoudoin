@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <form action="/student/reviews/<%=review._id%>?_method=PUT" method="POST">
+        <label name="weekNumber" id="weekNumber"></label>
+      <h3><%=review.weekNumber%></h3>
+        <label name="rating" id="rating">how U doin?</label>
+        <select name="rating" id="rating" value="<%=review.rating%>">
+            <option value="0 - I have no understanding">0 - I have no understanding</option>
+            <option value="1 - I have very limited Understanding">1 - I have very limited Understanding</option>
+            <option value='2 - I understand more than 50% of what weve done'>2 - I understand more than 50% of what weve done</option>
+            <option value='3 - I have a concrete level of understanding'>3 - I have a concrete level of understanding</option>
+            <option value='4 - I feel very comfortable with my level of understanding'>4 - I feel very comfortable with my level of understanding</option>
+        </select>
+        <label name="weeklyReview" id="weeklyReview">why: </label>
+        <input type="text" name="weeklyReview" id="weeklyReview" value="<%= review.weeklyReview %>"> 
+        <button>Submit</button>
+
+
+    </form>
+
+    
+</body>
+</html>

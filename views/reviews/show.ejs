@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <h3><%= review.weekNumber %></h3>
+    <ul>
+        
+            <p> rating: <%= review.rating %> </p>
+            <p>why: <%= review.weeklyReview %></p>
+            <p>Date: <%= review.createdAt.toLocaleDateString() %></p>
+
+
+        
+        
+            <form action="/student/reviews/<%= review._id%>?_method=DELETE %>" method="POST">
+                <button>delete Review</button>
+            </form>
+            <a href="/student/reviews/<%=review._id%>/edit"><button>edit Review</button></a>
+    </ul>

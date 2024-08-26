@@ -5,7 +5,9 @@
 
 <%if (user){ %>
     <h1>Welcome <%= user.username %> </h1>
-   <a href="/student/information">Parent info</a>
+    
+   <a href="/student/information"> <button>Parent Info</button></a>
+   <a href="/student/reviews"> <button>Weekly Reviews</button></a>
 <% } else { %>
     <p>Create an Account!</p>
 <% } %>

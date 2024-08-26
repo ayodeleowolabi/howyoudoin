@@ -11,10 +11,14 @@ body {
 }
 
 
+.waves
+
+
 
 
 nav, footer {
-  background-color:lightblue;
+  background-image: url('/waves.svg');
+  
   display: flex;
   justify-content: space-between;
   align-items: center;

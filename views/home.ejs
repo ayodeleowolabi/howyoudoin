@@ -1,5 +1,13 @@
 <%- include('./partials/header.ejs') %>
 
+
 <h1>Home Page</h1>
+
+<%if (user){ %>
+    <h1>Welcome <%= user.username %> </h1>
+   <a href="/student/information">Parent info</a>
+<% } else { %>
+    <p>Create an Account!</p>
+<% } %>
 
 <%- include('./partials/footer.ejs') %>

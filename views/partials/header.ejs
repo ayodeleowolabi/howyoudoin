@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-  <nav>
+  <nav class="wave">
     <!-- Put links that you want to display at all times
          outside of the if/else 
     -->
-    <a href="/">HOME</a>
-    <div>
+    <div class="wave">
+      <a href="/">HOME</a>
       <% if (user) { %>
         <a href="/todos/new">Protected Route</a>&nbsp;&nbsp;
         <a href="/auth/logout">LOG OUT</a>&nbsp;&nbsp;
-        <span>Wecome, <%= user.username %></span>
+        <span>Welcome, <%= user.username %></span>
       <% } else { %>
         <a href="/auth/sign-up">SIGN UP</a>
         <a href="/auth/login">LOG IN</a>

@@ -1,0 +1,24 @@
+<%- include('../partials/header.ejs') %>
+
+
+<p>Make sure your contact form is up to date.</p>
+<a href="/student/information/new">Create Your Contact Form</a>
+<a href="/student/information/edit">Edit Your Contact Form</a>
+
+<% if(studentInfo?.parentname){ %>
+
+    <ul>
+        <p>Parent Name: <%= studentInfo.parentname %></p>
+        <p>Phone Number: <%= studentInfo.phone %></p>
+        <p>Home Address: <%= studentInfo.address %></p>
+        <p>Homeroom Teacher: <%= studentInfo.homeroomteacher %></p>
+        
+        
+    </ul>
+
+<% } else { %>
+    <h1>You have no student information</h1>
+<% } %>
+
+
+<%- include('../partials/footer.ejs') %>

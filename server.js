@@ -42,6 +42,7 @@ const ensureLoggedIn = require('./middleware/ensureLoggedIn');
 // within authCtrl are appended to
 app.use('/auth', require('./controllers/auth'));
 app.use('/todos', require('./controllers/todos'));
+app.use('/student/information', ensureLoggedIn, require('./controllers/studentinformation'))
 // If you wanted to protect ALL routes 
 // app.use('/todos', ensureLoggedIn, require('./controllers/todos'));
 

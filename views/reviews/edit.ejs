@@ -10,7 +10,8 @@
     <form action="/student/reviews/<%=review._id%>?_method=PUT" method="POST">
         <label name="weekNumber" id="weekNumber"></label>
       <h3><%=review.weekNumber%></h3>
-        <label name="rating" id="rating">how U doin?</label>
+      <h3>past Feels:</h3><p><%= review.rating %></p>
+        <label name="rating" id="rating">change Feels:</label>
         <select name="rating" id="rating" value="<%=review.rating%>">
             <option value="0 - I have no understanding">0 - I have no understanding</option>
             <option value="1 - I have very limited Understanding">1 - I have very limited Understanding</option>

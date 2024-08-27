@@ -8,7 +8,8 @@ const Review = require('../models/review');
 // index functionality
 
 router.get('/', async (req, res) => {
-    const reviews = await Review.find({}).sort('createdAt').populate('owner')
+ 
+    const reviews = await Review.find({owner: req.user._id}).sort('createdAt').populate('owner')
     console.log(reviews)
     res.render('reviews/index.ejs', { reviews })
 

@@ -20,13 +20,13 @@
             <option value="Jones">Jones</option>
             <option value="Warner">Warner</option>
         </select>
-        <button type="submit">Edit Form</button>
+        <button type="submit">Edit</button>
             
+        <form action="/student/information/<%=studentForm._id%>?_method=DELETE" method="POST">
+            <button>Delete</button>
+        </form>
     </form>
 
-    <form action="/student/information/<%=studentForm._id%>?_method=DELETE" method="POST">
-        <button>Delete</button>
-    </form>
     
     
 </body>

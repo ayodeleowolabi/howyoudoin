@@ -1,23 +1,46 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Nerko+One&family=Rampart+One&family=Rubik+Bubbles&display=swap');
+
+
 * {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Rampart One", Arial, Helvetica, sans-serif;
 }
 
+html{
+  color-scheme: dark light;
+}
+
+
+h1{
+  font-size: 100px;
+  font-family: "Rampart One",
+}
+
+h2{
+  font-size: 50px;
+  margin-top: -10px;
+}
+
+
 body {
+  background-color: white;
   margin: 0;
   height: 100vh;
   display: grid;
   grid-template-rows: 8vh 1fr 4vh;
+  color: orange;
 }
 
 
-.waves
+
 
 
 
 
 nav, footer {
-  background-image: url('/waves.svg');
+  
+  
   
   display: flex;
   justify-content: space-between;
@@ -52,14 +75,61 @@ main {
   margin-top: 5vmin;
 }
 
+
+
 form {
+  --input-focus: #2d8cf0;
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: beige;
+  --main-color: black;
+  padding: 30px;
+  background: rgb(133, 223, 253);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+}
+
+.displayinfo{
+  --la-focus: #2d8cf0;
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: beige;
+  --main-color: black;
+  padding: 30px;
+  background: rgb(242, 94, 178);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  color:aliceblue;
+  font-family: "Indie Flower", cursive;
+
+
+}
+
+
+
+
+
+
+/* form {
   display: grid;
   grid-template-columns: auto auto;
   gap: 2vmin;
-}
+} */
 
 form * {
-  font-size: 2vmin;
+  font-size: 2.5vmin;
   padding: 1vmin;
   border-radius: 1vmin;
 }

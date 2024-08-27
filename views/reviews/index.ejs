@@ -7,16 +7,13 @@
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
-
-    <h1>Reviews</h1>
-
+     
+    <h2>Your Weekly Reviews</h2>
     <% reviews.forEach(review => { %>
-
-        
         <ul><a href="/student/reviews/<%=review._id%>"><%= review.weekNumber %></a></ul>
-
-   <% }); %>
-   <a href="/student/reviews/new"><button>New Review</button></a>
-    
+        <% }); %>
+        <br>
+        
+        <a href="/student/reviews/new"><button>New Review</button></a>
 </body>
 </html>

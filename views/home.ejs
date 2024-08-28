@@ -6,11 +6,19 @@
             <h2>Welcome <%= user.username %>!
             </h2>
 
-            <a href="/student/information"> <button>Parent Info</button></a>
+            <div class="displayinfo"><p class="textHighlight">Weekly Objective: "I will be able to calculate the slope of a line on the x-y axis."</p>
+            </div>
+            <br>
+
             <br>
             <a href="/student/reviews"> <button>Weekly Reviews</button></a>
+            <br>
+            <a href="/student/information"> <button>Parent Info</button></a>
             <% } else { %>
                 <h1>how U doin?</h1>
+                <div class="displayinfo"><p class="textHighlight">designed to check on you and make sure you feel confident in YOUR classes.</p>
+                </div>
+
                 <% } %>
     </main>
 

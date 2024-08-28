@@ -2,23 +2,23 @@
 
 
 
-<% if(studentInfo?.parentname){ %>
-    <ul class="displayinfo">
-        
-        <h2>Your Information</h2>
-        <p>Parent Name: <%= studentInfo.parentname %></p>
-        <p>Phone Number: <%= studentInfo.phone %></p>
-        <p>Home Address: <%= studentInfo.address %></p>
-        <p>Homeroom Teacher: <%= studentInfo.homeroomteacher %></p>
-        
-        
-    </ul>
-    <a href="/student/information/edit">Edit Your Contact Form</a>
+    <% if(studentInfo?.parentname){ %>
+        <ul class="displayinfo">
+            <h2 class="headerHighlight">Your Information</h2>
+            <p class="textHighlight">Parent Name: <%= studentInfo.parentname %></p>
+            <p class="textHighlight">Phone Number: <%= studentInfo.phone %></p>
+            <p class="textHighlight">Home Address: <%= studentInfo.address %></p>
+            <p class="textHighlight">Homeroom Teacher: <%= studentInfo.homeroomteacher %></p>
 
-<% } else { %>
-    <h3>You have no student information</h3>
-    <a href="/student/information/new">Create Your Contact Form</a>
-<% } %>
+        </ul>
+        <a href="/student/information/edit">Edit Your Contact Form</a>
+
+        <% } else { %>
+            <div class="displayinfo">
+                <h3 class="headerHighlight">You have no student information</h3>
+                <a href="/student/information/new"><button>Upload your Student Info</button></a>
+                <% } %>
+            </div>
 
 
-<%- include('../partials/footer.ejs') %>
+                <%- include('../partials/footer.ejs') %>

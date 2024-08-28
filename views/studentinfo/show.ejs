@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form</title>
 </head>
+
 <body>
     <%- include('../partials/header.ejs') %>
-   <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Information </title>
-</head>
-<body>
-    <%- include('../partials/header.ejs') %>
-    <form action="/student/information?_method=DELETE" method="POST">
-        <button>Delete</button>
-    </form>
-    <a href="/student/information/edit">Edit Your Contact Form</a>
-        <ul>
-            <p>Parent Name: <%= studentInfo.parentname %></p>
-            <p>Phone Number: <%= studentInfo.phone %></p>
-            <p>Home Address: <%= studentInfo.address %></p>
-            <p>Homeroom Teacher: <%= studentInfo.homeroomteacher %></p>
-        
-        
-        </ul>
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Student Information </title>
+        </head>
+
+        <body>
+            <%- include('../partials/header.ejs') %>
+                <form action="/student/information?_method=DELETE" method="POST">
+                    <button>Delete</button>
+                </form>
+                <a href="/student/information/edit">Edit Your Contact Form</a>
+                <ul>
+                    <p>Parent Name: <%= studentInfo.parentname %>
+                    </p>
+                    <p>Phone Number: <%= studentInfo.phone %>
+                    </p>
+                    <p>Home Address: <%= studentInfo.address %>
+                    </p>
+                    <p>Homeroom Teacher: <%= studentInfo.homeroomteacher %>
+                    </p>
 
 
-    
+                </ul>
+
+
+
+        </body>
+
+        </html>
+
+        <%- include('../partials/footer.ejs') %>
 </body>
-</html>
-            
-    <%- include('../partials/footer.ejs') %>
-</body>
+
 </html>

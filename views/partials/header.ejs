@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Authentication</title>
+  <title>howUdoin?</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
+
 <body>
-    <nav>
-      <div>      
-        <a href="/">HOME</a>
-        <% if (user) { %>
-          <a href="/auth/logout">LOG OUT</a>
-          <a href="/student/reviews/">WEEKLY REVIEWS</a>
-          <a href="/student/information">CONTACT FORM</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        
+  <nav>
+    <div>
+      <a href="/">HOME</a>
+      <% if (user) { %>
+        <a href="/auth/logout">LOG OUT</a>
+        <a href="/student/reviews/">WEEKLY REVIEWS</a>
+        <a href="/student/information">CONTACT FORM</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <% } else { %>
           <a href="/auth/sign-up">SIGN UP</a>
           <a href="/auth/login">LOG IN</a>
-        <% } %>
-        </div>
-    </nav>
+          <% } %>
+    </div>
+  </nav>
   </div>
   <main>
-

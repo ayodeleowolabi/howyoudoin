@@ -34,10 +34,12 @@ I developed this app using **HTML, CSS**, **Javascript**, **Node JS**, **Express
 When you open the app, start by signing up with a username and password. When you log in, you will see the current weeks objective, a link to your weekly reviews, and a link to your contact information. You can create, edit/update and delete any of your reviews or student contact information. 
 
 ## Future Updates
-* creating a Student First and last name in my student infor schema. 
+* Creating a Student First and last name in my student infor schema. 
 * Finding a way to link teachers to this app so the objective they submit will be what is displayed. 
 * Finding a way to log pictures of weekly student quizzes on this app.
 * Editing the smaller text on the forms and making sure it is readable.
+* Editing this page to say "you have no reviews" if none exist.
+[page](tochange.png)
 
 ## Live Demo
 You can use my first ever app creation **howUdoin?** [here](https://howudoin-fa786f7b4a41.herokuapp.com/)

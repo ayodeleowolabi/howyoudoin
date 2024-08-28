@@ -38,8 +38,7 @@ When you open the app, start by signing up with a username and password. When yo
 * Finding a way to link teachers to this app so the objective they submit will be what is displayed. 
 * Finding a way to log pictures of weekly student quizzes on this app.
 * Editing the smaller text on the forms and making sure it is readable.
-* Editing this page to say "you have no reviews" if none exist.
-[page](tochange.png)
+* Editing this [page](tochange.png) to say "you have no reviews" if none exist.
 
 ## Live Demo
 You can use my first ever app creation **howUdoin?** [here](https://howudoin-fa786f7b4a41.herokuapp.com/)

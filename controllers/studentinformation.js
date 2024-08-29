@@ -3,8 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 
 
-// ALL Paths begin with //student/information
-// INDEX
+
 router.get('/', (req, res) => {
     const user = req.user
     const studentInfo = req.user.studentInformation
@@ -13,12 +12,12 @@ router.get('/', (req, res) => {
 });
 
 
-// NEW 
+
 router.get('/new', (req, res) => {
     res.render('studentinfo/new.ejs')
 });
 
-// UPDATE?
+
 
 router.post('/', async (req, res) => {
     try {
@@ -35,7 +34,6 @@ router.post('/', async (req, res) => {
 
 
 
-// EDIT
 router.get('/edit', async (req, res) => {
     const student = req.user
     const studentForm = req.user.studentInformation
@@ -50,12 +48,12 @@ router.delete('/:id', async (req, res) => {
 
     try {
         const user = await User.findById(req.user._id)
-        console.log('user:', user)
+     
        
 
         await user.studentInformation.deleteOne()
         await user.save()
-        console.log("user:", user)
+     
 
 
     } catch (err) {
@@ -65,7 +63,6 @@ router.delete('/:id', async (req, res) => {
 });
 
 
-// DELETE
 
 
 

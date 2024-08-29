@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/login', async (req, res) => {
   const user = await User.findOne({username: req.body.username});
-  console.log(user)
+
   res.render('auth/login.ejs', {user});
 });
 

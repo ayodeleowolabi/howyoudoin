@@ -1,13 +1,19 @@
-<%- include('../partials/header.ejs') %>
-
-  <h1>Log In</h1>
-  <form action="/auth/login" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" required name="username" id="username" />
-    <label for="password">Password:</label>
-    <input type="password" required name="password" id="password" />
-    <br>
-    <button type="submit">Log In</button>
+<%- include('../partials/header.ejs', { title: 'Log in' }) %>
+<section class="auth-card card">
+  <h1>Welcome back</h1>
+  <p class="muted">Log in to check in for the week.</p>
+  <%- include('../partials/error-banner.ejs') %>
+  <form action="/auth/login" method="POST" class="form">
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" value="<%= username %>" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Log in</button>
   </form>
-
-  <%- include('../partials/footer.ejs') %>
+  <p class="muted center">New here? <a href="/auth/sign-up">Create an account</a></p>
+</section>
+<%- include('../partials/footer.ejs') %>

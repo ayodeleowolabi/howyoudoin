@@ -1,0 +1,35 @@
+<%- include('../partials/header.ejs', { title: 'Contact info' }) %>
+<section class="page-head">
+  <p class="eyebrow">For your teacher</p>
+  <h1><%= mode === 'edit' ? 'Edit contact info' : 'Add contact info' %></h1>
+</section>
+<div class="card narrow">
+  <%- include('../partials/error-banner.ejs') %>
+  <form action="/student/information<%= mode === 'edit' ? '?_method=PUT' : '' %>" method="POST" class="form">
+    <div class="field">
+      <label for="parentname">Parent / guardian name</label>
+      <input type="text" id="parentname" name="parentname" value="<%= studentInfo.parentname || '' %>" required>
+    </div>
+    <div class="field">
+      <label for="phone">Phone number</label>
+      <input type="tel" id="phone" name="phone" value="<%= studentInfo.phone || '' %>" autocomplete="tel">
+    </div>
+    <div class="field">
+      <label for="address">Home address</label>
+      <input type="text" id="address" name="address" value="<%= studentInfo.address || '' %>" autocomplete="street-address">
+    </div>
+    <div class="field">
+      <label for="homeroomteacher">Homeroom teacher</label>
+      <select id="homeroomteacher" name="homeroomteacher" required>
+        <% teachers.forEach(t => { %>
+          <option value="<%= t %>" <%= studentInfo.homeroomteacher === t ? 'selected' : '' %>><%= t %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"><%= mode === 'edit' ? 'Save changes' : 'Save contact info' %></button>
+      <a href="/student/information" class="btn btn-ghost">Cancel</a>
+    </div>
+  </form>
+</div>
+<%- include('../partials/footer.ejs') %>

@@ -1,70 +1,54 @@
 const express = require('express');
+const wrap = require('../utils/asyncHandler');
+
 const router = express.Router();
-const User = require('../models/user');
+const FIELDS = ['parentname', 'phone', 'address', 'homeroomteacher'];
 
-
+function pickInfo(body) {
+  const data = {};
+  for (const key of FIELDS) data[key] = String(body[key] || '').trim();
+  return data;
+}
 
 router.get('/', (req, res) => {
-    const user = req.user
-    const studentInfo = req.user.studentInformation
-    res.render('studentinfo/index.ejs', { user, studentInfo });
-
+  res.render('studentinfo/index.ejs', { studentInfo: req.user.studentInformation });
 });
-
-
 
 router.get('/new', (req, res) => {
-    res.render('studentinfo/new.ejs')
+  res.render('studentinfo/form.ejs', { studentInfo: {}, error: null, mode: 'new' });
 });
 
-
-
-router.post('/', async (req, res) => {
-    try {
-        req.user.studentInformation = req.body
-        await req.user.save();
-
-    } catch (err) {
-        console.log(err)
-    }
-    console.log('req.body:', req.body)
-    res.redirect('/student/information')
+router.get('/edit', (req, res) => {
+  if (!req.user.studentInformation) return res.redirect('/student/information/new');
+  res.render('studentinfo/form.ejs', { studentInfo: req.user.studentInformation, error: null, mode: 'edit' });
 });
 
+// Create or replace the logged-in student's contact info
+async function saveInfo(req, res) {
+  const data = pickInfo(req.body);
+  req.user.studentInformation = data;
+  try {
+    await req.user.save();
+    res.redirect('/student/information');
+  } catch (err) {
+    if (err.name !== 'ValidationError') throw err;
+    const mode = req.method === 'PUT' ? 'edit' : 'new';
+    res.status(422).render('studentinfo/form.ejs', {
+      studentInfo: data, mode, error: 'Please check the contact form and try again.',
+    });
+  }
+}
+router.post('/', wrap(saveInfo));
+router.put('/', wrap(saveInfo));
 
+async function deleteInfo(req, res) {
+  if (req.user.studentInformation) {
+    req.user.studentInformation = undefined;
+    await req.user.save();
+  }
+  res.redirect('/student/information');
+}
+router.delete('/', wrap(deleteInfo));
+router.delete('/:id', wrap(deleteInfo)); // older form posted to /student/information/:id
 
-
-router.get('/edit', async (req, res) => {
-    const student = req.user
-    const studentForm = req.user.studentInformation
-    const body = req.body
-    console.log('studentform:', { studentForm, student })
-    res.render('studentinfo/edit.ejs', { studentForm, student, body })
-
-});
-
-
-router.delete('/:id', async (req, res) => {
-
-    try {
-        const user = await User.findById(req.user._id)
-     
-       
-
-        await user.studentInformation.deleteOne()
-        await user.save()
-     
-
-
-    } catch (err) {
-        console.log(err)
-    }
-    res.redirect('/student/information')
-});
-
-
-
-
-
-module.exports = router
-
+module.exports = router;

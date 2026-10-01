@@ -1,24 +1,29 @@
-<%- include('../partials/header.ejs') %>
-
-
-
-    <% if(studentInfo?.parentname){ %>
-        <ul class="displayinfo">
-            <h2 class="headerHighlight">Your Information</h2>
-            <p class="textHighlight">Parent Name: <%= studentInfo.parentname %></p>
-            <p class="textHighlight">Phone Number: <%= studentInfo.phone %></p>
-            <p class="textHighlight">Home Address: <%= studentInfo.address %></p>
-            <p class="textHighlight">Homeroom Teacher: <%= studentInfo.homeroomteacher %></p>
-
-        </ul>
-        <a href="/student/information/edit">Edit Your Contact Form</a>
-
-        <% } else { %>
-            <div class="displayinfo">
-                <h3 class="headerHighlight">You have no student information</h3>
-                <a href="/student/information/new"><button>Upload your Student Info</button></a>
-                <% } %>
-            </div>
-
-
-                <%- include('../partials/footer.ejs') %>
+<%- include('../partials/header.ejs', { title: 'Contact info' }) %>
+<section class="page-head">
+  <p class="eyebrow">For your teacher</p>
+  <h1>Contact info</h1>
+</section>
+<% if (studentInfo && studentInfo.parentname) { %>
+  <article class="card narrow" data-testid="contact-card">
+    <dl class="details">
+      <div><dt>Parent / guardian</dt><dd><%= studentInfo.parentname %></dd></div>
+      <div><dt>Phone</dt><dd><%= studentInfo.phone %></dd></div>
+      <div><dt>Home address</dt><dd><%= studentInfo.address %></dd></div>
+      <div><dt>Homeroom teacher</dt><dd><%= studentInfo.homeroomteacher %></dd></div>
+    </dl>
+    <div class="form-actions">
+      <a href="/student/information/edit" class="btn btn-primary">Edit contact info</a>
+      <form action="/student/information?_method=DELETE" method="POST" onsubmit="return confirm('Remove your contact info?')">
+        <button type="submit" class="btn btn-danger">Remove</button>
+      </form>
+    </div>
+  </article>
+<% } else { %>
+  <section class="empty card" data-testid="empty-contact">
+    <span class="feature-icon" aria-hidden="true">📇</span>
+    <h2>You haven't added contact info yet</h2>
+    <p class="muted">Add a parent or guardian so your teacher can reach them.</p>
+    <a href="/student/information/new" class="btn btn-primary">Add contact info</a>
+  </section>
+<% } %>
+<%- include('../partials/footer.ejs') %>

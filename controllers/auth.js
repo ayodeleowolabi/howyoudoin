@@ -1,63 +1,60 @@
 const express = require('express');
-const router = express.Router();
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const bcrypt = require('bcrypt')
+const wrap = require('../utils/asyncHandler');
+
+const router = express.Router();
+const SALT_ROUNDS = 10;
 
 // All paths start with "/auth"
 
-// GET /auth/sign-up (show sign-up form)
 router.get('/sign-up', (req, res) => {
-  res.render('auth/sign-up.ejs');
+  res.render('auth/sign-up.ejs', { error: null, username: '' });
 });
 
-// POST /auth/sign-up (create user)
-router.post('/sign-up', async (req, res) => {
-  try {
-    if (req.body.password !== req.body.confirmPassword) {
-      throw new Error('Password & confirmation do not match');
-    }
-    req.body.password = bcrypt.hashSync(req.body.password, 6);
-    const user = await User.create(req.body);
-    // "remember" only the user's _id in the session object
-    req.session.user = { _id: user._id };
-    req.session.save();
-  } catch (err) {
-    console.log(err);
-  }
-  res.redirect('/');
-});
+router.post('/sign-up', wrap(async (req, res) => {
+  const username = (req.body.username || '').trim();
+  const { password = '', confirmPassword = '' } = req.body;
+  const fail = (error) => res.status(422).render('auth/sign-up.ejs', { error, username });
 
-// POST /auth/login (login user)
-router.post('/login', async (req, res) => {
+  if (!username) return fail('Please choose a username.');
+  if (password.length < 6) return fail('Password must be at least 6 characters.');
+  if (password !== confirmPassword) return fail('Passwords do not match.');
+  if (await User.exists({ username })) return fail('That username is already taken.');
+
   try {
-    const user = await User.findOne({username: req.body.username});
-    if (!user) {
-      return res.redirect('/auth/login');
-    }
-    if (bcrypt.compareSync(req.body.password, user.password)) {
+    const user = await User.create({ username, password: bcrypt.hashSync(password, SALT_ROUNDS) });
+    req.session.regenerate(() => {
       req.session.user = { _id: user._id };
-      req.session.save();
-      // Perhaps update to some other functionality
-      return res.redirect('/');
-    } else {
-      return res.redirect('/auth/login');
-    }
+      req.session.save(() => res.redirect('/'));
+    });
   } catch (err) {
-    console.log(err);
-    res.redirect('/');
+    console.error(err);
+    fail('Something went wrong. Please try again.');
   }
+}));
+
+router.get('/login', (req, res) => {
+  res.render('auth/login.ejs', { error: null, username: '' });
 });
 
-router.get('/login', async (req, res) => {
-  const user = await User.findOne({username: req.body.username});
+router.post('/login', wrap(async (req, res) => {
+  const username = (req.body.username || '').trim();
+  const user = await User.findOne({ username });
+  if (!user || !bcrypt.compareSync(req.body.password || '', user.password)) {
+    return res.status(401).render('auth/login.ejs', {
+      error: 'Incorrect username or password.',
+      username,
+    });
+  }
+  req.session.regenerate(() => {
+    req.session.user = { _id: user._id };
+    req.session.save(() => res.redirect('/'));
+  });
+}));
 
-  res.render('auth/login.ejs', {user});
-});
-
-// GET /auth/logout (logout)
 router.get('/logout', (req, res) => {
-  req.session.destroy();
-  res.redirect('/');
+  req.session.destroy(() => res.redirect('/'));
 });
 
 module.exports = router;

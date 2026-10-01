@@ -1,23 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../partials/header.ejs', { title: review.weekNumber }) %>
+<p><a href="/student/reviews" class="back-link">← All reviews</a></p>
+<article class="card narrow">
+  <div class="row">
+    <h1><%= review.weekNumber %></h1>
+    <%- include('../partials/rating-chip.ejs', { score: review.score }) %>
+  </div>
+  <div class="meter" aria-hidden="true"><span class="meter-fill rating-<%= review.score %>" style="width: <%= review.score * 25 %>%"></span></div>
+  <p class="rating-label" data-testid="rating-label"><%= review.ratingLabel %></p>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+  <h2 class="section-label">Reflection</h2>
+  <p class="reflection" data-testid="reflection"><%= review.weeklyReview || 'No notes added.' %></p>
+  <p class="date">Submitted <%= review.createdAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></p>
 
-<body>
-    <%- include('../partials/header.ejs') %>
-        <h2>
-            <%= review.weekNumber %>
-        </h2>
-        <ul class="displayinfo">
-            <p class="textHighlight"> rating: <%= review.rating %></p>
-            <p class="textHighlight">why: <%= review.weeklyReview %></p>
-            <p class="textHighlight">Date: <%= review.createdAt.toLocaleDateString() %></p>
-            <a href="/student/reviews/<%=review._id%>/edit"><button>edit Review</button></a>
-            <form action="/student/reviews/<%= review._id%>?_method=DELETE %>" method="POST">
-                <button>delete Review</button>
-            </form>
-        </ul>
+  <div class="form-actions">
+    <a href="/student/reviews/<%= review._id %>/edit" class="btn btn-primary">Edit review</a>
+    <form action="/student/reviews/<%= review._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this review?')">
+      <button type="submit" class="btn btn-danger">Delete review</button>
+    </form>
+  </div>
+</article>
+<%- include('../partials/footer.ejs') %>

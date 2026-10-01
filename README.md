@@ -2,9 +2,11 @@
 
 [![Tests](https://github.com/ayodeleowolabi/howyoudoin/actions/workflows/tests.yml/badge.svg)](https://github.com/ayodeleowolabi/howyoudoin/actions/workflows/tests.yml)
 
+**🔗 Live demo: [howudoin.onrender.com](https://howudoin.onrender.com)**. Click **Try the demo** to log in with a sample student account; no sign-up needed. *(It's on a free server that sleeps, so the first load can take about 30 seconds.)*
+
 A full-stack app where students submit **weekly self-reviews**, rating how well they understand the material from 0 to 4 and adding a reflection. I built it from my time as a classroom teacher (Teach For America), so teachers can spot students who are falling behind *before* the test, not after.
 
-It began as my first full-stack app at General Assembly. Later I came back to it as a QA project: I did an exploratory test pass, wrote up **12 bugs** (including two critical access-control flaws), fixed them, and put **52 automated tests** in CI so they stay fixed. I also redesigned the UI.
+It began as my first full-stack app at General Assembly. Later I came back to it as a QA project: I did an exploratory test pass, wrote up **12 bugs** (including two critical access-control flaws), fixed them, and put **55 automated tests** in CI so they stay fixed. I also redesigned the UI.
 
 ![Landing page](docs/screenshots/landing.png)
 
@@ -13,7 +15,7 @@ It began as my first full-stack app at General Assembly. Later I came back to it
 | | |
 |---|---|
 | 🐞 **Exploratory testing** | [Bug report](docs/BUG_REPORT.md) with 12 defects plus 1 security hardening item, each with severity, repro steps, root cause and fix |
-| 🔌 **API tests** | 40 Jest + Supertest tests: auth, route protection, CRUD, validation, mass assignment, and **cross-user authorization** |
+| 🔌 **API tests** | 43 Jest + Supertest tests: auth, route protection, CRUD, validation, mass assignment, and **cross-user authorization** |
 | 🎭 **E2E tests** | 12 Playwright scenarios × 2 viewports (desktop + mobile) = 24 runs, using accessible, role-based locators |
 | ⚙️ **CI** | GitHub Actions runs both suites against a MongoDB service container on every push and PR, and uploads an HTML report |
 | ✅ **Regression-proof** | Every bug ID in the report maps to a named test. Reintroducing the access-control bug fails 4 tests. |
@@ -51,6 +53,15 @@ npm install
 cp .env.example .env    # then fill in MONGODB_URI and SESSION_SECRET
 npm run dev             # http://localhost:3000
 ```
+
+## Deployment
+
+The app is deployed on **Render** with **MongoDB Atlas**. The `render.yaml` blueprint sets everything up:
+
+- Sessions are stored in MongoDB (`connect-mongo`), so logins survive restarts, and cookies are `Secure`, `HttpOnly` and `SameSite=Lax` in production.
+- A `/healthz` endpoint is used for Render's health checks.
+- When `SHOW_DEMO_LOGIN=true`, a demo account is created on startup if it doesn't exist yet. Run `npm run seed:demo` to reset it to the sample data.
+- Every merge to `main` auto-deploys.
 
 ## Running the tests
 

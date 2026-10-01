@@ -1,15 +1,24 @@
-<%- include('../partials/header.ejs') %>
-
-  <h1>Sign Up!</h1>
-  <form action="/auth/sign-up" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" required name="username" id="username" />
-    <label for="password">Password:</label>
-    <input type="password" required name="password" id="password" />
-    <label for="confirmPassword">Confirm Password:</label>
-    <input type="password" required name="confirmPassword" id="confirmPassword" />
-    <br>
-    <button type="submit">Sign up</button>
+<%- include('../partials/header.ejs', { title: 'Sign up' }) %>
+<section class="auth-card card">
+  <h1>Create your account</h1>
+  <p class="muted">It takes less than a minute.</p>
+  <%- include('../partials/error-banner.ejs') %>
+  <form action="/auth/sign-up" method="POST" class="form">
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" value="<%= username %>" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="new-password" minlength="6" required aria-describedby="password-hint">
+      <small id="password-hint" class="muted">At least 6 characters</small>
+    </div>
+    <div class="field">
+      <label for="confirmPassword">Confirm password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Sign up</button>
   </form>
-
-  <%- include('../partials/footer.ejs') %>
+  <p class="muted center">Already have an account? <a href="/auth/login">Log in</a></p>
+</section>
+<%- include('../partials/footer.ejs') %>

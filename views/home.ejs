@@ -1,25 +1,53 @@
-<%- include('./partials/header.ejs') %>
+<%- include('./partials/header.ejs', { title: 'Home' }) %>
+<% if (user) { %>
+  <section class="page-head">
+    <p class="eyebrow">Welcome back</p>
+    <h1>Hi, <%= user.username %>! 👋</h1>
+    <p class="lead">How are you feeling about class this week?</p>
+  </section>
 
-    <main>
-
-        <%if (user){ %>
-            <h2>Welcome <%= user.username %>!
-            </h2>
-
-            <div class="displayinfo"><p class="textHighlight">Weekly Objective: "I will be able to calculate the slope of a line on the x-y axis."</p>
-            </div>
-            <br>
-
-            <br>
-            <a href="/student/reviews"> <button>Weekly Reviews</button></a>
-            <br>
-            <a href="/student/information"> <button>Parent Info</button></a>
-            <% } else { %>
-                <h1>how U doin?</h1>
-                <div class="displayinfo"><p class="textHighlight">designed to check on you and make sure you feel confident in YOUR classes.</p>
-                </div>
-
-                <% } %>
-    </main>
-
-    <%- include('./partials/footer.ejs') %>
+  <div class="grid grid-2">
+    <article class="card card-accent">
+      <p class="eyebrow">This week's objective</p>
+      <p class="objective">"I will be able to calculate the slope of a line on the x-y axis."</p>
+      <a href="/student/reviews/new" class="btn btn-primary">Check in for this week</a>
+    </article>
+    <article class="card">
+      <p class="eyebrow">Your progress</p>
+      <p class="stat" data-testid="review-count"><%= stats.count %></p>
+      <p class="muted"><%= stats.count === 1 ? 'weekly review' : 'weekly reviews' %> submitted</p>
+      <% if (stats.latest) { %>
+        <p class="muted">Latest: <%= stats.latest.weekNumber %> · <%- include('./partials/rating-chip.ejs', { score: stats.latest.score }) %></p>
+      <% } %>
+      <a href="/student/reviews" class="btn btn-ghost">See all reviews</a>
+    </article>
+  </div>
+<% } else { %>
+  <section class="hero">
+    <p class="eyebrow">Weekly check-ins for students</p>
+    <h1>how <span class="highlight">U</span> doin?</h1>
+    <p class="lead">A quick, private way to tell your teacher how confident you feel each week, so you get help before the test, not after.</p>
+    <div class="hero-actions">
+      <a href="/auth/sign-up" class="btn btn-primary btn-lg">Get started</a>
+      <a href="/auth/login" class="btn btn-ghost btn-lg">I have an account</a>
+    </div>
+  </section>
+  <section class="grid grid-3 features">
+    <article class="card">
+      <span class="feature-icon" aria-hidden="true">📝</span>
+      <h2>Reflect weekly</h2>
+      <p class="muted">Rate your understanding from 0 to 4 and add a note in your own words.</p>
+    </article>
+    <article class="card">
+      <span class="feature-icon" aria-hidden="true">📈</span>
+      <h2>See your growth</h2>
+      <p class="muted">Look back at every week and notice how your confidence changes.</p>
+    </article>
+    <article class="card">
+      <span class="feature-icon" aria-hidden="true">🔒</span>
+      <h2>Private to you</h2>
+      <p class="muted">Your reviews are only visible to you, never to other students.</p>
+    </article>
+  </section>
+<% } %>
+<%- include('./partials/footer.ejs') %>

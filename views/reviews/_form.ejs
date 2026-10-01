@@ -1,0 +1,34 @@
+<%- include('../partials/error-banner.ejs') %>
+<form action="<%= action %>" method="POST" class="form">
+  <div class="field">
+    <label for="weekNumber">Week</label>
+    <select id="weekNumber" name="weekNumber" required>
+      <% weeks.forEach(w => { %>
+        <option value="<%= w %>" <%= review.weekNumber === w ? 'selected' : '' %>><%= w %></option>
+      <% }) %>
+    </select>
+  </div>
+
+  <fieldset class="field">
+    <legend>How well do you understand this week's material?</legend>
+    <div class="rating-options">
+      <% ratings.forEach((r, i) => { %>
+        <label class="rating-option rating-<%= i %>">
+          <input type="radio" name="rating" value="<%= r %>" <%= review.rating === r ? 'checked' : '' %> required>
+          <span class="rating-num"><%= i %></span>
+          <span class="rating-text"><%= labels[i] %></span>
+        </label>
+      <% }) %>
+    </div>
+  </fieldset>
+
+  <div class="field">
+    <label for="weeklyReview">Tell me more</label>
+    <textarea id="weeklyReview" name="weeklyReview" rows="5" placeholder="What clicked? What's still confusing?"><%= review.weeklyReview || '' %></textarea>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary"><%= submitLabel %></button>
+    <a href="<%= cancelHref %>" class="btn btn-ghost">Cancel</a>
+  </div>
+</form>

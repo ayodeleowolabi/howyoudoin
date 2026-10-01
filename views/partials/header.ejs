@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>howUdoin?</title>
+  <title><%= typeof title !== 'undefined' ? title + ' · ' : '' %>howUdoin?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/main.css">
 </head>
-
 <body>
-  <nav>
-    <div>
-      <a href="/">HOME</a>
-      <% if (user) { %>
-        <a href="/auth/logout">LOG OUT</a>
-        <a href="/student/reviews/">WEEKLY REVIEWS</a>
-        <a href="/student/information">CONTACT FORM</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main">
+      <a href="/" class="brand" aria-label="howUdoin home">
+        <span class="brand-bubble" aria-hidden="true">?</span>
+        <span>how<strong>U</strong>doin</span>
+      </a>
+      <div class="nav-links">
+        <% if (locals.user) { %>
+          <a href="/student/reviews" class="<%= (locals.path || '').startsWith('/student/reviews') ? 'active' : '' %>">Weekly reviews</a>
+          <a href="/student/information" class="<%= (locals.path || '').startsWith('/student/information') ? 'active' : '' %>">Contact info</a>
+          <a href="/auth/logout" class="btn btn-ghost btn-sm">Log out</a>
         <% } else { %>
-          <a href="/auth/sign-up">SIGN UP</a>
-          <a href="/auth/login">LOG IN</a>
-          <% } %>
-    </div>
-  </nav>
-  </div>
-  <main>
+          <a href="/auth/login" class="<%= locals.path === '/auth/login' ? 'active' : '' %>">Log in</a>
+          <a href="/auth/sign-up" class="btn btn-primary btn-sm">Sign up</a>
+        <% } %>
+      </div>
+    </nav>
+  </header>
+  <main id="main" class="container">

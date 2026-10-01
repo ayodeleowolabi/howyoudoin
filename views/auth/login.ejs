@@ -2,6 +2,18 @@
 <section class="auth-card card">
   <h1>Welcome back</h1>
   <p class="muted">Log in to check in for the week.</p>
+  <% if (demo) { %>
+    <div class="alert alert-info" data-testid="demo-hint">
+      👋 Just looking around? Log in with <strong><%= demo.username %></strong> / <strong><%= demo.password %></strong>
+      <button type="button" class="btn btn-ghost btn-sm" id="use-demo">Fill in demo login</button>
+    </div>
+    <script>
+      document.getElementById('use-demo').addEventListener('click', () => {
+        document.getElementById('username').value = <%- JSON.stringify(demo.username) %>;
+        document.getElementById('password').value = <%- JSON.stringify(demo.password) %>;
+      });
+    </script>
+  <% } %>
   <%- include('../partials/error-banner.ejs') %>
   <form action="/auth/login" method="POST" class="form">
     <div class="field">

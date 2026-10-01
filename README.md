@@ -1,47 +1,56 @@
 # howUdoin?
-Welcome to my first app as a software developer. As a former teacher, I decided to create an host that collects student data and weekly feedback called **howUdoin**.
 
-I developed this app using **HTML, CSS**, **Javascript**, **Node JS**, **Express** and **MongoDB**.
+**Live demo:** [howudoin on Heroku](https://howudoin-fa786f7b4a41.herokuapp.com/)
 
-## Technologies Used
-* CSS
-* Javascript
-* HTML
-* Express
-* Node JS
-* Nodemon
-* MongoDB
-* bcrypt
-* mongoose
+A full-stack CRUD app where students submit **weekly self-reviews** rating how well they understand the material. I built it while I was a classroom teacher (Teach For America), to help teachers spot students who are falling behind before the test, not after. It was my first full-stack app at General Assembly.
 
-## Middleware Used
-* express-session
-* method-overide
-* morgan
+![howUdoin screenshot](howUdoin.png)
 
-## Project Planning
-* As I was planning my app I used Canva to design my wireframe. You can see visuals of my process [here](https://www.canva.com/design/DAGOV3mnpwk/yO8CGHJXTir5WL6CStQ9HQ/view?utm_content=DAGOV3mnpwk&utm_campaign=designshare&utm_medium=link&utm_source=editor)
-* I used **Lucid** to design my ERD.
-* I used **Trello** to document my ERD and User Stories. [here]
-(https://trello.com/b/M2Wyq88u) 
+## Features
 
+- **Authentication**: sign up and log in with bcrypt-hashed passwords and server-side sessions.
+- **Weekly reviews (full CRUD)**: students choose a week and rate their understanding on a 0–4 scale, then add a written reflection. They can create, view, edit and delete each review.
+- **Student contact information**: full CRUD as well.
+- **Route protection**: an `ensureLoggedIn` middleware guards every student route, and each review is tied to the user who wrote it.
 
+## Tech stack
 
-> Jan, my pod leader here at **General Assembly** also gave me resources to change my CSS and create a better UI. 
+| Layer | Tools |
+|---|---|
+| Server | Node.js, Express |
+| Database | MongoDB, Mongoose |
+| Views | EJS templates, CSS |
+| Auth | bcrypt, express-session |
+| Middleware | method-override, morgan |
 
+## Data model
 
-## How to Use
-When you open the app, start by signing up with a username and password. When you log in, you will see the current weeks objective, a link to your weekly reviews, and a link to your contact information. You can create, edit/update and delete any of your reviews or student contact information. 
+- **User**: username, hashed password
+- **Review**: owner (→ User), week number, rating (0–4 scale), written review, timestamps
+- **Student information**: contact details for each user
 
-## Future Updates
-* Creating a Student First and last name in my student infor schema. 
-* Finding a way to link teachers to this app so the objective they submit will be what is displayed. 
-* Finding a way to log pictures of weekly student quizzes on this app.
-* Editing the smaller text on the forms and making sure it is readable.
-* Editing this [page](tochange.png) to say "you have no reviews" if none exist.
+## Running locally
 
-## Live Demo
-You can use my first ever app creation **howUdoin?** [here](https://howudoin-fa786f7b4a41.herokuapp.com/)
+```bash
+npm install
+# create a .env file (git-ignored) with:
+#   MONGODB_URI=
+#   SESSION_SECRET=
+npm start
+```
 
-### Screenshot
-![quizgame](howUdoin.png)
+## Planning
+
+- Wireframes designed in [Canva](https://www.canva.com/design/DAGOV3mnpwk/yO8CGHJXTir5WL6CStQ9HQ/view)
+- ERD designed in Lucid
+- User stories tracked in [Trello](https://trello.com/b/M2Wyq88u)
+
+## What I'd add next
+
+- Link teacher accounts so that teachers set each week's objective
+- Upload photos of weekly quizzes
+- An empty state ("You have no reviews yet") on the reviews page
+- First and last name fields in the student schema
+
+---
+Built by **Ayodele Owolabi**, General Assembly Software Engineering Immersive
